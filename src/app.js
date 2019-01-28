@@ -1,37 +1,44 @@
 console.log("App.js msg");
 
-let object = {
+const object = {
     title: "title",
-    subtitle: "subtitle"
+    subtitle: "subtitle",
+    options: ["one", "two"],
 }
-let { title, subtitle } = object
-let template = (
+const { title, subtitle, options } = object
+
+const getOptions = (object) => object.options.length > 0 ? `Here are your options: ${object.options}` : `No Options`;
+console.log(object.options);
+
+const template = (
     <div>
         <h1> {title} </h1>
-        <p>{subtitle}</p>
+        {subtitle && <p>{subtitle}</p>}
+        <p>{getOptions(object)}</p>
     </div>
 );
 
 const username = "Bob"
 const userAge = 25
 const userLocation = "kent"
-let user = {
-    name: "Andrew",
-    age: 20,
+const user = {
+    name: "bob",
+    age: 23,
     userLocation2: "lol",
 }
-let { name, age, userLocation2 } = user
+const { name, age, userLocation2 } = user
 
-let getLocation = (location) => location ? <p>Location: {userLocation2}</p> : undefined;
+const getLocation = (location) => location ? <p>Location: {userLocation2}</p> : undefined;
 
 const newTemp = (
     <div>
-        <h1>{name}</h1>
-        <p>Age: {age}</p>
+        <h1>{user.name ? name : "Anon"}</h1>
+        {age >= 18 && <p>Age: {age}</p>
+        }
         {getLocation(userLocation2)}
     </div>
 );
-let appRoot = document.getElementById("app");
+const appRoot = document.getElementById("app");
 
-ReactDOM.render(newTemp, appRoot);
+ReactDOM.render(template, appRoot);
 

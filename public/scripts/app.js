@@ -4,10 +4,18 @@ console.log("App.js msg");
 
 var object = {
     title: "title",
-    subtitle: "subtitle"
+    subtitle: "subtitle",
+    options: ["one", "two"]
 };
 var title = object.title,
-    subtitle = object.subtitle;
+    subtitle = object.subtitle,
+    options = object.options;
+
+
+var getOptions = function getOptions(object) {
+    return object.options.length > 0 ? "Here are your options: " + object.options : "No Options";
+};
+console.log(object.options);
 
 var template = React.createElement(
     "div",
@@ -19,10 +27,15 @@ var template = React.createElement(
         title,
         " "
     ),
-    React.createElement(
+    subtitle && React.createElement(
         "p",
         null,
         subtitle
+    ),
+    React.createElement(
+        "p",
+        null,
+        getOptions(object)
     )
 );
 
@@ -30,8 +43,8 @@ var username = "Bob";
 var userAge = 25;
 var userLocation = "kent";
 var user = {
-    name: "Andrew",
-    age: 20,
+    name: "bob",
+    age: 23,
     userLocation2: "lol"
 };
 var name = user.name,
@@ -54,9 +67,9 @@ var newTemp = React.createElement(
     React.createElement(
         "h1",
         null,
-        name
+        user.name ? name : "Anon"
     ),
-    React.createElement(
+    age >= 18 && React.createElement(
         "p",
         null,
         "Age: ",
@@ -66,4 +79,4 @@ var newTemp = React.createElement(
 );
 var appRoot = document.getElementById("app");
 
-ReactDOM.render(newTemp, appRoot);
+ReactDOM.render(template, appRoot);
