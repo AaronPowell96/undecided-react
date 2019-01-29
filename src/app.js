@@ -3,38 +3,28 @@ console.log("App.js msg");
 const app = {
     title: "title",
     subtitle: "subtitle",
-    options: ["one", "two"],
+    options: [],
 }
 
-let count = 0;
-const addOne = () => {
-    count++;
-    renderCounterApp();
-    console.log(count);
+const onFormSubmit = (e) => {
+    e.preventDefault();
+    const option = e.target.elements.option.value;
+    if (option) {
+        options.push(option)
+        e.target.elements.option.value = "";
+    }
 }
-const minusOne = () => {
-    count--;
-    renderCounterApp();
-    console.log(count);
-}
-const reset = () => {
-    count = 0;
-    renderCounterApp();
-    console.log(count);
-}
-
 const appRoot = document.getElementById("app");
-
-const renderCounterApp = () => {
-
-    const templateTwo = (
-        <div>
-            <h1>Count: {count} </h1>
-            <button onClick={addOne}>Add 1</button>
-            <button onClick={minusOne}>Minus 1</button>
-            <button onClick={reset}>Reset</button>
-        </div>
-    );
-    ReactDOM.render(templateTwo, appRoot);
-}
-renderCounterApp();
+const { title, subtitle, options } = app
+const template = (
+    <div>
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+        <p>{app.options.length > 0 ? `Here are your options: ${app.options}` : "No Options"}</p>
+        <form onSubmit={onFormSubmit}>
+            <input type="text" name="option" />
+            <button>Add Option</button>
+        </form>
+    </div>
+);
+ReactDOM.render(template, appRoot);
