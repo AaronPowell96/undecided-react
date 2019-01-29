@@ -36,6 +36,12 @@ var optionsList = function optionsList() {
         );
     });
 };
+
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var choice = app.options[randomNum];
+    alert(choice);
+};
 var appRoot = document.getElementById("app");
 
 var renderElements = function renderElements() {
@@ -58,6 +64,16 @@ var renderElements = function renderElements() {
             app.options.length > 0 ? "Here are your options:" : "No Options"
         ),
         React.createElement(
+            "button",
+            { disabled: app.options.length < 1, onClick: onMakeDecision },
+            "What Should I do? "
+        ),
+        React.createElement(
+            "button",
+            { onClick: removeAll },
+            "Remove All"
+        ),
+        React.createElement(
             "ol",
             null,
             app.options.map(function (option) {
@@ -67,11 +83,6 @@ var renderElements = function renderElements() {
                     option
                 );
             })
-        ),
-        React.createElement(
-            "button",
-            { onClick: removeAll },
-            "Remove All"
         ),
         React.createElement(
             "form",
