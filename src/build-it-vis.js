@@ -1,26 +1,33 @@
-
-
-const appRoot = document.getElementById("app");
-const onToggle = () => {
-    visibility = !visibility
-    renderElements();
+class Person {
+    constructor(name = "Anon", age = 0) {
+        this.name = name;
+        this.age = age
+    }
+    getGreeting() {
+        return `Hello ${this.name}`
+    }
+    getDesc() {
+        return `${this.name} is ${this.age} year${this.age === 1 ? `` : `s`} old.`
+    }
 }
 
-let visibility = false;
+class Student extends Person {
+    constructor(name, age, className) {
+        super();
+        this.className = className;
+    }
+    hasMajor() {
+        return !!this.className
+    }
+    getDesc() {
+        let description = super.getDesc();
 
-const renderElements = () => {
-    const template = (
-        <div>
-            <h1>Visibility Toggle</h1>
-            <button onClick={onToggle} >{visibility ? "Hide Details" : "Show Details"}</button>
-            {visibility && (
-                <div>
-                    <p> Details here </p>
-                </div>
-            )}
-        </div>
-    );
-    ReactDOM.render(template, appRoot);
+        if(this.hasMajor()){
+            
+        }
+    }
 }
 
-renderElements();
+const me = new Student("aaron", 20, "cs")
+
+console.log(me.getDesc());
