@@ -69,10 +69,18 @@ class Option extends React.Component {
     }
 }
 class AddOption extends React.Component {
+    handleAddOption(e) {
+        e.preventDefault();
+        const option = e.target.elements.optionName.value.trim()
+        option ? alert(option) : undefined
+    }
     render() {
         return (
             <div>
-                <h1>Add Option here</h1>
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="optionName" />
+                    <button>Add Option</button>
+                </form>
             </div>
         )
     }
