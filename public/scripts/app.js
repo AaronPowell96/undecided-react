@@ -24,7 +24,7 @@ var Person = function () {
     _createClass(Person, [{
         key: "getGreeting",
         value: function getGreeting() {
-            return "Hello " + this.name;
+            return "Hello I am " + this.name;
         }
     }, {
         key: "getDesc",
@@ -58,13 +58,44 @@ var Student = function (_Person) {
         value: function getDesc() {
             var description = _get(Student.prototype.__proto__ || Object.getPrototypeOf(Student.prototype), "getDesc", this).call(this);
 
-            if (this.hasMajor()) {}
+            if (this.hasMajor()) {
+                description += " Their major is " + this.className;
+            }
+            return description;
         }
     }]);
 
     return Student;
 }(Person);
 
-var me = new Student("aaron", 20, "cs");
+var Traveller = function (_Person2) {
+    _inherits(Traveller, _Person2);
 
-console.log(me.getDesc());
+    function Traveller(name, age, homeLocation) {
+        _classCallCheck(this, Traveller);
+
+        var _this2 = _possibleConstructorReturn(this, (Traveller.__proto__ || Object.getPrototypeOf(Traveller)).call(this));
+
+        _this2.homeLocation = homeLocation;
+        return _this2;
+    }
+
+    _createClass(Traveller, [{
+        key: "getGreeting",
+        value: function getGreeting() {
+            var greet = _get(Traveller.prototype.__proto__ || Object.getPrototypeOf(Traveller.prototype), "getGreeting", this).call(this);
+            if (this.homeLocation) {
+                greet += ", I am visiting from " + this.homeLocation;
+            }
+            return greet;
+        }
+    }]);
+
+    return Traveller;
+}(Person);
+
+var me = new Student("aaron", 20, "cs");
+var me1 = new Traveller("aaron", 20);
+
+console.log(me.getGreeting());
+console.log(me1.getGreeting());
