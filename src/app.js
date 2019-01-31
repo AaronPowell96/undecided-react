@@ -9,6 +9,33 @@ class IndecisionApp extends React.Component {
             options: props.options
         }
     }
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem("options")
+            const options = JSON.parse(json)
+
+            if (options) {
+                this.setState(() => ({ options }))
+            }
+        } catch (e) {
+
+        }
+
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length !== this.state.options.length) {
+
+            const json = JSON.stringify(this.state.options)
+            localStorage.setItem("options", json)
+
+            console.log("saved data")
+        }
+        console.log("updated");
+    }
+
+    componentWillUnmount() {
+        console.log("unmount");
+    }
 
     handleDeleteOptions() {
         this.setState(() => ({ options: [] }))
